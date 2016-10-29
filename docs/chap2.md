@@ -1,7 +1,7 @@
 Echo Server
 -----------
 
-
+## What is 'Echo Protocol' ?
 
 ```
 Network Working Group                                          J. Postel
@@ -40,7 +40,7 @@ UDP Based Echo Service
 
 
 
-__EchoServerHandler.java__
+__[EchoServerHandler.java](../src/main/java/com/dongshujin/demo/netty/echo/EchoServerHandler.java)__
 
 1. A ChannelHandlerContext object provides various operations that enable you to trigger various I/O events and operations. Here, we invoke write(Object) to write the received message in verbatim. Please note that we did not release the received message unlike we did in the DISCARD example. It is because Netty releases it for you when it is written out to the wire.
 2. ctx.write(Object) does not make the message written out to the wire. It is buffered internally, and then flushed out to the wire by ctx.flush(). Alternatively, you could call ctx.writeAndFlush(msg) for brevity.

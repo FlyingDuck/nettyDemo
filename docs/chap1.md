@@ -1,6 +1,8 @@
 Discard Server
 --------------
 
+## What is 'Discard Protocol' ?
+
 ```
 Network Working Group                                          J. Postel
 Request for Comments: 863                                            ISI
@@ -38,7 +40,7 @@ UDP Based Discard Service
 ```
 
 
-__[DiscardServerHandler.java](src/main/java/com/dongshujin/demo/netty/discard/DiscardServerHandler.java)__
+__[DiscardServerHandler.java](../src/main/java/com/dongshujin/demo/netty/discard/DiscardServerHandler.java)__
 
 1. DiscardServerHandler extends ChannelInboundHandlerAdapter, which is an implementation of ChannelInboundHandler. ChannelInboundHandler provides various event handler methods that you can override. For now, it is just enough to extend ChannelInboundHandlerAdapter rather than to implement the handler interface by yourself.
 2. We override the channelRead() event handler method here. This method is called with the received message, whenever new data is received from a client. In this example, the type of the received message is ByteBuf.
@@ -47,7 +49,7 @@ __[DiscardServerHandler.java](src/main/java/com/dongshujin/demo/netty/discard/Di
 
 
 
-__DiscardServer.java__
+__[DiscardServer.java](../src/main/java/com/dongshujin/demo/netty/discard/DiscardServer.java)__
 
 1. NioEventLoopGroup is a multithreaded event loop that handles I/O operation. Netty provides various EventLoopGroup implementations for different kind of transports. We are implementing a server-side application in this example, and therefore two  NioEventLoopGroup will be used. The first one, often called 'boss', accepts an incoming connection. The second one, often called 'worker', handles the traffic of the accepted connection once the boss accepts the connection and registers the accepted connection to the worker. How many Threads are used and how they are mapped to the created Channels depends on the EventLoopGroup implementation and may be even configurable via a constructor.
 2. ServerBootstrap is a helper class that sets up a server. You can set up the server using a Channel directly. However, please note that this is a tedious process, and you do not need to do that in most cases.

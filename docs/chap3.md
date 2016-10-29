@@ -1,6 +1,7 @@
 Time Server
 -----------
 
+## What is 'Time Protocol' ?
 
 ```
 Network Working Group                                    J. Postel - ISI
@@ -52,7 +53,7 @@ When used via TCP the time service works as follows:
    sending anything.
 ```
 
-__TimeServerHandler.java__
+__[TimeServerHandler.java](../src/main/java/com/dongshujin/demo/netty/time/TimeServerHandler.java)__
 
 1. As explained, the channelActive() method will be invoked when a connection is established and ready to generate traffic. Let's write a 32-bit integer that represents the current time in this method.
 2. To send a new message, we need to allocate a new buffer which will contain the message. We are going to write a 32-bit integer, and therefore we need a ByteBuf whose capacity is at least 4 bytes. Get the current ByteBufAllocator via ChannelHandlerContext.alloc() and allocate a new buffer.
@@ -75,7 +76,7 @@ __TimeServerHandler.java__
    f.addListener(ChannelFutureListener.CLOSE);    
    ```
 
-__TimeClient.java__
+__[TimeClient.java](../src/main/java/com/dongshujin/demo/netty/time/TimeClient.java)__
 
 1. Bootstrap is similar to ServerBootstrap except that it's for non-server channels such as a client-side or connectionless channel.
 2. If you specify only one EventLoopGroup, it will be used both as a boss group and as a worker group. The boss worker is not used for the client side though.
@@ -84,7 +85,7 @@ __TimeClient.java__
 5. We should call the connect() method instead of the bind() method.
 
 
-__TimeClientHandler.java__
+__[TimeClientHandler.java](../src/main/java/com/dongshujin/demo/netty/time/TimeClientHandler.java)__
 
 1. In TCP/IP, Netty reads the data sent from a peer into a ByteBuf.
 
