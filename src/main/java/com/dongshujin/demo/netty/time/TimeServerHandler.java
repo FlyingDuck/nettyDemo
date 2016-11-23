@@ -11,6 +11,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
+    /**
+     * 链接建立时调用
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelActive(final ChannelHandlerContext ctx) throws Exception {     // (1)
 //        super.channelActive(ctx);
@@ -22,9 +27,15 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
             public void operationComplete(ChannelFuture future) throws Exception {
                 assert future == channelFuture;
-                ctx.close();
+                //ctx.close();  // 这里关闭
             }
         }); // (4)
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        ctx.write(msg);
+        ctx.flush();
     }
 
 
