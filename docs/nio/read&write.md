@@ -15,16 +15,16 @@
 3. 将数据从 Channel 读到 Buffer 中。
 
 ##### 三个步骤
-- 第一步 获取通道。我们从 FileInputStream 获取通道：
+- 第一步 获取通道。我们从 FileInputStream 获取通道：  
     ```
     FileInputStream fin = new FileInputStream( "readandshow.log" );
     FileChannel fc = fin.getChannel();
     ```
-- 第二步 创建缓冲区：
+- 第二步 创建缓冲区：  
     ```
     ByteBuffer buffer = ByteBuffer.allocate(1024);
     ``` 
-- 第三步 将数据从通道读到缓冲区中，如下所示：
+- 第三步 将数据从通道读到缓冲区中，如下所示：  
     ```
     fc.read( buffer );
     ```
@@ -54,21 +54,23 @@ public void testRead() {
 程序让我们看到如何检查操作的状态，以及如何使用 clear() 和 flip() 方法重设缓冲区，并准备缓冲区以便将新读取的数据写到另一个通道中。
 
 - **读写**
-因为缓冲区会跟踪它自己的数据，所以程序的内部循环 (inner loop) 非常简单，如下所示：
+因为缓冲区会跟踪它自己的数据，所以程序的内部循环 (inner loop) 非常简单，如下所示：  
     ```
     fcin.read( buffer );   // 将数据从输入通道 fcin 中读入缓冲区
     fcout.write( buffer ); // 将这些数据写到输出通道 fcout
     ```
+    
 - **检查状态**
-检查拷贝何时完成。当没有更多的数据时，拷贝就算完成，并且可以在 read() 方法返回 -1 是判断这一点：
+检查拷贝何时完成。当没有更多的数据时，拷贝就算完成，并且可以在 read() 方法返回 -1 是判断这一点：  
     ```
     int r = fcin.read( buffer );
     if (r==-1) {
          break;
     }
     ```
+    
 - **重设缓冲区**
-从输入通道读入缓冲区之前，我们调用 clear() 方法。同样，在将缓冲区写入输出通道之前，我们调用 flip() 方法，如下所示：
+从输入通道读入缓冲区之前，我们调用 clear() 方法。同样，在将缓冲区写入输出通道之前，我们调用 flip() 方法，如下所示：  
     ```
     buffer.clear();
     int r = fcin.read( buffer );
@@ -80,6 +82,7 @@ public void testRead() {
     buffer.flip();
     fcout.write( buffer );
     ```
+    
     `clear()` 方法重设缓冲区，使它可以接受读入的数据  
     `flip()` 方法让缓冲区可以将新读入的数据写入另一个通道。
 
