@@ -1,14 +1,5 @@
-
-[Netty](http://netty.io/)
--------------------------
-
-1. [Discard Server](docs/chap1.md)
-2. [Echo Server](docs/chap2.md)
-3. [Time Server](docs/chap3.md)
-
-
 Understand NIO
---------------------
+--------------
 
 ### NIO简介：
 I/O（输入/输出）：指的是计算机与外部世界或者一个程序与计算机的其余部分的之间的接口。它对于任何计算机系统都非常关键，因而I/O的主体实际上是内置在操作系统中的。单独的程序一般是让系统为它们完成大部分的工作。
@@ -69,6 +60,22 @@ Channel 可以通过它读取和写入数据。拿 NIO 与原来的 I/O 做个�
 通道与流的不同之处在于通道是双向的。而流只是在一个方向上移动(一个流必须是 InputStream 或者 OutputStream 的子类)， 而 通道 可以用于读、写或者同时用于读写。
 因为它们是双向的，所以通道可以比流更好地反映底层操作系统的真实情况。特别是在 UNIX 模型中，底层操作系统通道是双向的。
 
+
+标准NIO
+-----
+
+1. [NIO读写](docs/nio/read&write.md)
+
+
+
+
+
+[Netty](http://netty.io/)
+-------------------------
+
+1. [Discard Server](docs/chap1.md)
+2. [Echo Server](docs/chap2.md)
+3. [Time Server](docs/chap3.md)
 
 
 
