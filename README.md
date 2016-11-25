@@ -70,6 +70,7 @@ Channel 可以通过它读取和写入数据。拿 NIO 与原来的 I/O 做个�
 4. [分散/聚集](docs/nio/scatter_gather.md)
 5. [文件锁定](docs/nio/file_lock.md)
 6. [异步IO](docs/nio/asynchronous_io.md)
+7. [字符集](docs/nio/charset.md)
 
 
 
