@@ -33,6 +33,28 @@ public class NIORandWTest {
     }
 
     @Test
+    public void testWrite() {
+        byte[] message = "some bytes to write".getBytes();
+
+        try {
+            FileOutputStream fout = new FileOutputStream("/Users/dongsj/workspace/dsj/javaSpace/nettyDemo/src/test/resources/nio/writeshow.log");
+            FileChannel fileChannel = fout.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+            for (int i=0; i < message.length; i++) {
+                buffer.put(message[i]);
+            }
+            buffer.flip();
+
+            fileChannel.write(buffer);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testReadAndWrite() {
         FileInputStream fin;
         FileOutputStream fout;

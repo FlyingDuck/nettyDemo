@@ -49,6 +49,94 @@ public void testRead() {
 }
 ```
 
+---
+
+## 写入文件
+在 NIO 中写入文件类似于从文件中读取。
+
+##### 三个步骤
+- 第一步 获取通道。从 FileOutputStream 获取一个通道：
+    ```
+    FileOutputStream fout = new FileOutputStream( "writesomebytes.txt" );
+    FileChannel fc = fout.getChannel();
+    ```
+- 第二步 创建缓冲区。创建一个缓冲区并在其中放入一些数据，这里数据将从一个名为 message 的数组中取出，这个数组包含字符串 "Some bytes" 的 ASCII 字节。
+    ```
+    ByteBuffer buffer = ByteBuffer.allocate( 1024 );
+    
+    for (int i=0; i<message.length; ++i) {
+         buffer.put( message[i] );
+    }
+    buffer.flip();
+    ```
+    
+    `buffer#flip()`: ；  
+    `buffer#put()`: 将指定的byte写入缓冲区，并将写入位置递增， 这个方法有其它重载方法； 
+    
+> 
+> `flip()`源代码可以看出，该方法将limit指向了缓冲区当前位置 `position`，并将`position`设置为0，将`mark`丢弃
+> ```
+> public final Buffer flip() {
+>        limit = position;
+>        position = 0;
+>        mark = -1;
+>        return this;
+>    }
+> ```
+>
+> - ***mark <= position <= limit <= capacity***
+> - **mark** : 标示了缓冲区中执行`reset`操作时，position应该置于的位置
+> - **position** : 标示缓冲区中下一个能够进行读写的位置
+> - **limit** : 标示缓冲区中第一个不能进行读写的位置
+> - **capacity**: 用来指定缓冲区的最大容量，它是不变的
+>
+>
+> `allocate(1024)`
+> ```
+> public static ByteBuffer allocate(int capacity) {
+>         if (capacity < 0)
+>             throw new IllegalArgumentException();
+>         return new HeapByteBuffer(capacity, capacity);
+>     }
+> ```
+> 在调用allocate()方法分配缓冲区时，实际上将limit 和 capacity 设置成了同样的大小。更多细节可以参考 Buffer & ByteBuffer源码
+
+
+- 第三步 写入缓冲区中：
+    ```
+    fc.write( buffer );
+    ```
+注意在这里同样不需要告诉通道要写入多数据。缓冲区的内部统计机制会跟踪它包含多少数据以及还有多少数据要写入。
+
+```
+    @Test
+    public void testWrite() {
+        byte[] message = "some bytes to write".getBytes();
+
+        try {
+            FileOutputStream fout = new FileOutputStream("/Users/dongsj/workspace/dsj/javaSpace/nettyDemo/src/test/resources/nio/writeshow.log");
+            FileChannel fileChannel = fout.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+            for (int i=0; i < message.length; i++) {
+                buffer.put(message[i]);
+            }
+            buffer.flip();
+
+            fileChannel.write(buffer);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+
+
+---
+
+
 ## 读&写
 
 将一个文件的所有内容拷贝到另一个文件中。执行三个基本操作：(1)创建一个Buffer，(2)从源文件中将数据读到这个缓冲区中，(3)将缓冲区写入目标文件。这个程序不断重复，直到源文件结束。
