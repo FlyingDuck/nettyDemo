@@ -65,6 +65,8 @@ Channel 可以通过它读取和写入数据。拿 NIO 与原来的 I/O 做个�
 -----
 
 1. [NIO读写](docs/nio/read&write.md)
+2. [NIO缓冲区(1)](docs/nio/buffer_1.md)
+2. [NIO缓冲区(2)](docs/nio/buffer_2.md)
 
 
 
