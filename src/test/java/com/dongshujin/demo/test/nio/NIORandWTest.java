@@ -11,6 +11,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * Created by dongsj on 16/11/23.
+ * NIO 读写测试
  */
 public class NIORandWTest {
 

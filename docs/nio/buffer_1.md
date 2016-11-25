@@ -109,7 +109,6 @@ position 设置为0。如果我们写一些数据到缓冲区中，那么下一�
 我们从缓冲区中取4个字节并将它们写入输出通道。这使得 position 增加到 4，而 limit 不变，如下所示：
 
 ![第一次读取缓冲区](http://upload-images.jianshu.io/upload_images/1366868-35d565864f6cc89d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-204.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 - ##### 第二次读取缓冲区
