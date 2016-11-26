@@ -2,8 +2,10 @@ package com.dongshujin.demo.test.nio;
 
 import org.junit.Test;
 
-import javax.imageio.stream.FileCacheImageInputStream;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;

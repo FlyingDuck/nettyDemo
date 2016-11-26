@@ -60,9 +60,36 @@ Channel 可以通过它读取和写入数据。拿 NIO 与原来的 I/O 做个�
 通道与流的不同之处在于通道是双向的。而流只是在一个方向上移动(一个流必须是 InputStream 或者 OutputStream 的子类)， 而 通道 可以用于读、写或者同时用于读写。
 因为它们是双向的，所以通道可以比流更好地反映底层操作系统的真实情况。特别是在 UNIX 模型中，底层操作系统通道是双向的。
 
+---
 
-标准NIO
+
+NIO.2
 -----
+
+### NIO.2简介
+
+Java 7 中的 More New I/O APIs，通过在 java.nio.channels 包中增加四个异步通道，从而增强了 Java 1.4 中的 New I/O APIs（NIO）：
+
+1. AsynchronousSocketChannel
+2. AsynchronousServerSocketChannel
+3. AsynchronousFileChannel
+4. AsynchronousDatagramChannel
+
+> ***异步通道*** 提供支持连接、读取、以及写入之类非锁定操作的连接，并提供对已启动操作的控制机制。
+
+这些类在风格上与 NIO 通道 API 很相似。他们共享相同的方法与参数结构体，并且大多数对于 NIO 通道类可用的参数，对于新的异步版本仍然可用。主要区别在于新通道可使一些操作异步执行。
+
+异步通道 API 提供两种对已启动异步操作的监测与控制机制：
+
+- 第一种 是通过返回一个 `java.util.concurrent.Future` 对象来实现，它将会建模一个挂起操作，并可用于查询其状态以及获取结果。
+- 第二种 是通过传递给操作一个新类的对象，`java.nio.channels.CompletionHandler`来完成，它会定义操作完毕后所执行的处理程序方法。每个异步通道类为每个操作定义 API 副本，这样可采用任一机制。
+
+
+
+
+
+NIO
+---
 
 1. [NIO读写](docs/nio/read&write.md)
 2. [NIO缓冲区(1)](docs/nio/buffer_1.md)
@@ -72,6 +99,10 @@ Channel 可以通过它读取和写入数据。拿 NIO 与原来的 I/O 做个�
 6. [异步IO](docs/nio/asynchronous_io.md)
 7. [字符集](docs/nio/charset.md)
 
+NIO.2
+-----
+
+1. [异步套接字通道](docs/nio2/async_socket.md)
 
 
 
