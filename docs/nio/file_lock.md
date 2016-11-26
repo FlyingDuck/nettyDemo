@@ -30,5 +30,42 @@ lock.release();
 - 将所有的锁视为劝告式的（advisory）。
 
 
+```
+public class NIOFileLockTest {
 
+    private final int start = 10;
+    private final int end = 20;
+
+    @Test
+    public void fileLockTest() {
+
+        try {
+            RandomAccessFile raf = new RandomAccessFile(
+                    "/Users/dongsj/workspace/dsj/javaSpace/nettyDemo/src/test/resources/nio/readandshow.log",
+                    "rw");
+            FileChannel fc = raf.getChannel();
+
+            System.out.println("获取锁");
+            FileLock lock = fc.lock(start, end, false);
+            System.out.println("获取锁成功");
+
+            System.out.println("暂停3s");
+            Thread.sleep(3000);
+
+
+            System.out.println("释放锁");
+            lock.release();
+            System.out.println("释放锁成功");
+
+            raf.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
