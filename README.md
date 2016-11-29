@@ -84,7 +84,40 @@ Java 7 中的 More New I/O APIs，通过在 java.nio.channels 包中增加四个
 - 第一种 是通过返回一个 `java.util.concurrent.Future` 对象来实现，它将会建模一个挂起操作，并可用于查询其状态以及获取结果。
 - 第二种 是通过传递给操作一个新类的对象，`java.nio.channels.CompletionHandler`来完成，它会定义操作完毕后所执行的处理程序方法。每个异步通道类为每个操作定义 API 副本，这样可采用任一机制。
 
+---
 
+Netty
+------
+
+Netty是一个NIO client-server框架，可以快速和简单的开发网络应用程序，比如协议服务器服务器和客户端。Netty向你提供了一种新的方式开发你的网络应用程序，使得它简单和可扩展。它通过这样的方式实现：抽象出所涉及的复杂性和通过提供一种简单易用的API，这个将业务逻辑从网络处理代码中解耦出来。因为它是为NIO构建,所有的Netty API都是异步的.
+
+---
+
+### 不选择Java原生NIO编程的原因
+为什么不建议开发者直接使用 JDK 的 NIO 类库进行开发, 具体原因如下。
+1. NIO的类库和API繁杂,使用麻烦,你需要熟练掌握Selector、 ServerSocketChannel、SocketChannel、ByteBuffer等。
+2. 需要具备其他的额外技能做铺垫,例如熟悉Java多线程编程。这是因为 NIO编程涉及到Reactor模式,你必须对多线程和网路编程非常熟悉,才能 编写出高质量的NIO程序。
+3. 可靠性靠能力补齐,工作量和难度都非常大。例如客户端面临断连重连、网 络闪断、半包读写、失败缓存、网络拥塞和异常码流的处理等问题,NIO 编程的特点是功能开发相对容易,但是可靠性能力补齐的工作量和难度都 非常大。
+4. JDK NIO的BUG,例如臭名昭著的epoll bug,它会导致Selector空轮询, 最终导致CPU 100%。官方声称在JDK1.6版本的update18修复了该问题,但 是直到JDK1.7版本该问题仍旧存在,只不过该BUG发生概率降低了一些而 已,它并没有被根本解决。该BUG以及与该BUG相关的问题单可以参见以下 链接内容。 
+
+- [Bug](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6403933) 
+- [Bug](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=2147719)
+
+### 选择Netty的理由
+Netty 是业界最流行的 NIO 框架之一,它的健壮性、功能、性能、可定制性 和可扩展性在同类框架中都是首屈一指的,它已经得到成百上千的商用项目验证, 例如 Hadoop 的 RPC 框架 avro 使用 Netty 作为底层通信框架;很多其他业界主流 的 RPC 框架,也使用 Netty 来构建高性能的异步通信能力。
+
+通过对 Netty 的分析,我们将它的优点总结如下 :
+- • API使用简单,开发门槛低;
+- • 功能强大,预置了多种编解码功能,支持多种主流协议;
+- • 定制能力强,可以通过ChannelHandler对通信框架进行灵活地扩展;
+- • 性能高,通过与其他业界主流的NIO框架对比,Netty的综合性能最优;
+- • 成熟、稳定,Netty修复了已经发现的所有JDK NIO BUG,业务开发人员不需要再为NIO的BUG而烦恼;
+- • 社区活跃,版本迭代周期短,发现的BUG可以被及时修复,同时,更多的新功能会加入;
+- • 经历了大规模的商业应用考验,质量得到验证。在互联网、大数据、网络游戏、企业应用、电信软件等众多行业得到成功商用,证明了它已经完全能够满足不同行业的商业应用了。
+
+正是因为这些优点,Netty 逐渐成为 Java NIO 编程的首选框架。
+
+![Netty架构](http://upload-images.jianshu.io/upload_images/1366868-28165c0afa7bfe38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
