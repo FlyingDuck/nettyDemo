@@ -104,7 +104,7 @@ NIO.2
 
 1. [异步套接字通道](docs/nio2/async_socket.md)
 2. [异步文件瞳代](docs/nio2/async_file.md)
-
+3. [异步通道组](docs/nio2/async_channel_group.md)
 
 
 [Netty](http://netty.io/)
