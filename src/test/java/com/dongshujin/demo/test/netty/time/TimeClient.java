@@ -1,4 +1,4 @@
-package com.dongshujin.demo.netty.time;
+package com.dongshujin.demo.test.netty.time;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

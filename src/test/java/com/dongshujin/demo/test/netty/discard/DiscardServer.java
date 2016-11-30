@@ -1,4 +1,4 @@
-package com.dongshujin.demo.netty.discard;
+package com.dongshujin.demo.test.netty.discard;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

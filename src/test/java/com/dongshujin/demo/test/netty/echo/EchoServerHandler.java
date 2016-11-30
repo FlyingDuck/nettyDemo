@@ -1,4 +1,4 @@
-package com.dongshujin.demo.netty.echo;
+package com.dongshujin.demo.test.netty.echo;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

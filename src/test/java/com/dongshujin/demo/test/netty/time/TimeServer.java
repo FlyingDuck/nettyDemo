@@ -1,4 +1,4 @@
-package com.dongshujin.demo.netty.echo;
+package com.dongshujin.demo.test.netty.time;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -11,12 +11,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * Created by dongsj on 16/10/29.
- *
  */
-public class EchoServer {
+public class TimeServer {
     private int port;
 
-    public EchoServer(int port) {
+    public TimeServer(int port) {
         this.port = port;
     }
 
@@ -31,7 +30,7 @@ public class EchoServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {     // (4)
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new EchoServerHandler());
+                            ch.pipeline().addLast(new TimeServerHandler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)          // (5)
@@ -58,7 +57,7 @@ public class EchoServer {
         } else {
             port = 8080;
         }
-        new EchoServer(port).run();
+        new TimeServer(port).run();
     }
 
 }

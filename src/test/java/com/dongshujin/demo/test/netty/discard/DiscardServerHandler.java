@@ -1,4 +1,4 @@
-package com.dongshujin.demo.netty.discard;
+package com.dongshujin.demo.test.netty.discard;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
