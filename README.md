@@ -144,6 +144,7 @@ NIO.2
 -------------------------
 
 1. [Echo Server](docs/netty/echo_server.md)
+2. [Netty 鸟瞰](docs/netty/netty.md)
 
 
 
